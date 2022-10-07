@@ -3,7 +3,7 @@
 namespace api;
 use api/Database;
 
-class Product{
+class Product implements CRUD {
 
     public function __construct($sku, $name, $price){
         setSKU($sku);
@@ -31,6 +31,7 @@ class Product{
     public function setName($name){
         $this->name = $name;
     }
+    
     public function setPrice($price){
         $this->price = $price;
     }
