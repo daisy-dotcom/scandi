@@ -34,14 +34,28 @@ class Furniture extends Product implements CRUD{
     }
 
     public function get(){
+        $this->$query = "SELECT * FROM product join furniture using (sku)";
+        //$this->data = [getSKU(), getName(), getPrice(), getSize()];
+        return $this->db->get($query);
 
     }
 
     public function insert(){
+        $this->$query = "INSERT INTO furniture(sku, length, width, height) values (?, ?, ?, ?)";
+        $this->data = [
+            'sku' => getSKU(), 
+            'length' => getLength(), 
+            'width' => getWidth(), 
+            'height' => getHeight()
+        ];
+        return $this->db->insert($query, $data);
 
     }
-    public function delete(){
 
+    public function delete($skuToDelete){
+        $this->$query = "DELETE FROM furniture where sku in ?";
+        $this->data = $skuToDelete;
+        return $this->db->insert($query, $data);
     }
     
 }

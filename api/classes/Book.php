@@ -20,23 +20,26 @@ class Book extends Product implements CRUD{
     }
 
     public function get(){
+        $this->$query = "SELECT * FROM product join book using (sku)";
+        //$this->data = [getSKU(), getName(), getPrice(), getSize()];
+        return $this->db->get($query);
 
     }
-    
+
     public function insert(){
-        $data = [
-            'sku' => getSKU(),
-            'name' => getName(),
-            'price' => getPrice(),
-            'weight' => getWeight(),
+        $this->$query = "INSERT INTO book(sku, weight) values (:sku, :weight)";
+        $this->data = [
+            'sku' => getSKU(), 
+            'weight' => getWeight()
         ];
-        $query = "insert into Book(sku, name, price, weight) values ". 
-        "(:sku, :name, :price, :weight)";
-        $stmt = $this->db.getConnection()
+        return $this->db->insert($query, $data);
 
     }
-    public function delete(){
 
+    public function delete($skuToDelete){
+        $this->$query = "DELETE FROM book where sku in ?";
+        $this->data = $skuToDelete;
+        return $this->db->insert($query, $data);
     }
 
 }
