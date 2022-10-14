@@ -4,7 +4,7 @@ namespace api;
 
 require '../../private/config.php';
 
-class Database implements CRUD{
+class Database implements DBQueries{
 
     public function _construct(){
         setConnection();
@@ -33,15 +33,26 @@ class Database implements CRUD{
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
-
     }
 
     public function insert($query , $data){
-
+        $stmt = $this->connection->prepare($query);
+        if ($stmt->execute() == TRUE){
+            return 'SUCCESS';
+        }
+        else{
+            return 'FAIL';
+        }
     }
 
     public function delete($query , $data){
-
+        $stmt = $this->connection->prepare($query);
+        if ($stmt->execute() == TRUE){
+            return 'SUCCESS';
+        }
+        else{
+            return 'FAIL';
+        }
     }
 
 

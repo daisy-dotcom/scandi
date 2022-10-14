@@ -1,8 +1,9 @@
 <?php 
 
-interface CRUD{
+interface DBQueries{
     public function get();
     public function insert();
     public function delete();
 }
+
 ?>

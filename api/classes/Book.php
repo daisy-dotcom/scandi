@@ -1,9 +1,8 @@
 <?php
 
-namespace api;
-//use api\Database;
+require_once('../include/autoloader.php');
 
-class Book extends Product implements CRUD{
+class Book extends Product implements DBQueries{
 
     public function __construct($sku, $name, $price, $weight){
         parent::__construct($sku, $name, $price);

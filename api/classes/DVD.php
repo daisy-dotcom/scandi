@@ -1,8 +1,8 @@
 <?php
 
-namespace api;
+require_once('../include/autoloader.php');
 
-class DVD extends Product implements CRUD{
+class DVD extends Product implements DBQueries{
 
     public function __construct($sku, $name, $price, $size){
         parent::__construct($sku, $name, $price);
@@ -19,8 +19,7 @@ class DVD extends Product implements CRUD{
 
     public function get(){
         $this->$query = "SELECT * FROM product join dvd using (sku)";
-        //$this->data = [getSKU(), getName(), getPrice(), getSize()];
-        return $this->db->get($query);
+        return $this->db->get($this->query);
 
     }
 
@@ -30,13 +29,13 @@ class DVD extends Product implements CRUD{
             'sku' => getSKU(), 
             'size' => getSize()
         ];
-        return $this->db->insert($query, $data);
+        return $this->db->insert($this->query, $this->data);
     }
 
     public function delete($skuToDelete){
         $this->$query = "DELETE FROM dvd where sku in ?";
         $this->data = $skuToDelete;
-        return $this->db->insert($query, $data);
+        return $this->db->insert($this->query, $this->data);
 
     }
     

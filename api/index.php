@@ -1,29 +1,43 @@
 <?php 
+header("Access-Control-Allow-Origin: *");
 
-//  ----------------- TEST ----------------
-/*
- 
-*/
+require_once('include/autoloader.php');
 
-const $products = [
-    'Product' => "Product({$_REQUEST['sku']},{$_REQUEST['name']},
-    {$_REQUEST['price']})",
+$products = array(
+    'Product' => [$_REQUEST['sku'],$_REQUEST['name'],
+    $_REQUEST['price']],
 
-    'Book' => "Book({$_REQUEST['sku']},{$_REQUEST['name']},
-    {$_REQUEST['price']},{$_REQUEST['weight']})",
+    'Book' => [$_REQUEST['sku'],$_REQUEST['name'],
+    $_REQUEST['price'],$_REQUEST['weight']],
 
-    'Furniture' => "Furniture({$_REQUEST['sku']},{$_REQUEST['name']},
-    {$_REQUEST['price']},{$_REQUEST['length']},{$_REQUEST['width']},
-    {$_REQUEST['height']})",
+    'Furniture' => [$_REQUEST['sku'],$_REQUEST['name'], 
+    $_REQUEST['price'],$_REQUEST['length'],$_REQUEST['width'],
+    $_REQUEST['height']],
 
-    'DVD' => "DVD({$_REQUEST['sku']},{$_REQUEST['name']},
-    {$_REQUEST['price']},{$_REQUEST['size']})"
-];
+    'DVD' => [$_REQUEST['sku'],$_REQUEST['name'],
+    $_REQUEST['price'],$_REQUEST['size']]
+);
 
-/*
-  $classStr = 'C';
-  $e = new $classStr;
-  print get_class($e);
-*/
+  echo var_dump($_REQUEST);
+  //$classStr = $products[$_REQUEST['productType']];
+  $classStr = $_REQUEST['productType'];
+  echo var_dump($classStr);
+  echo __DIR__;
+  $item = new $classStr;
+  echo $item;
+  echo __DIR__;
+
+
+switch($_REQUEST['request']){
+  case 'get':
+    echo $item.get();
+    break;
+  case 'insert':
+    echo $item.insert();
+    break;
+  case 'delete':
+    echo item.delete();
+    break;
+}
 
 ?>
