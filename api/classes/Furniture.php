@@ -1,14 +1,14 @@
 <?php
 
-require_once('../include/autoloader.php');
+require_once(__DIR__ . '\..\include\autoloader.php');
 
 class Furniture extends Product implements DBQueries{
 
     public function __construct($sku, $name, $price, $length, $width, $height){
         parent::__construct($sku, $name, $price);
-        setLength($length);
-        setWidth($width);
-        setHeight($height);
+        $this->setLength($length);
+        $this->setWidth($width);
+        $this->setHeight($height);
     }
     public function getLength(){
         return $this->length;
@@ -42,10 +42,10 @@ class Furniture extends Product implements DBQueries{
     public function insert(){
         $this->$query = "INSERT INTO furniture(sku, length, width, height) values (?, ?, ?, ?)";
         $this->data = [
-            'sku' => getSKU(), 
-            'length' => getLength(), 
-            'width' => getWidth(), 
-            'height' => getHeight()
+            'sku' => $this->getSKU(), 
+            'length' => $this->getLength(), 
+            'width' => $this->getWidth(), 
+            'height' => $this->getHeight()
         ];
         return $this->db->insert($this->query, $this->data);
 

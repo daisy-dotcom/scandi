@@ -3,7 +3,7 @@
 interface DBQueries{
     public function get();
     public function insert();
-    public function delete();
+    public function delete($arg);
 }
 
 ?>

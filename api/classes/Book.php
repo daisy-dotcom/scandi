@@ -1,12 +1,12 @@
 <?php
 
-require_once('../include/autoloader.php');
+require_once(__DIR__ . '\..\include\autoloader.php');
 
 class Book extends Product implements DBQueries{
 
     public function __construct($sku, $name, $price, $weight){
         parent::__construct($sku, $name, $price);
-        setWeight($weight);
+        $this->setWeight($weight);
     }
 
     public function getWeight(){
@@ -28,8 +28,8 @@ class Book extends Product implements DBQueries{
     public function insert(){
         $this->$query = "INSERT INTO book(sku, weight) values (:sku, :weight)";
         $this->data = [
-            'sku' => getSKU(), 
-            'weight' => getWeight()
+            'sku' => $this->getSKU(), 
+            'weight' => $this->getWeight()
         ];
         return $this->db->insert($query, $data);
 

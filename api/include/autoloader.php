@@ -3,16 +3,28 @@
 spl_autoload_register('autoLoader');
 
 function autoLoader($className){
-    $path = "C:\\xampp\htdocs\scandi\api\\classes\\";
-    $ext = "php";
+
+    echo $className . "\n";
+
+    #$dir = dirname(__DIR__, 1);
+    #$path = $dir . "\classes\\";
+    $ext = ".php";
+
+    $path = __DIR__ . "\..\\" . "classes\\";
+
     $fullPath = $path . $className . $ext;
 
-    if(!file_exists($fullPath)){
-        echo 'Does not exist';
-        echo __DIR__;
-    }
+    echo $fullPath . "\n";
 
-    include $fullPath;
+    if(file_exists($fullPath)){
+        include $fullPath;
+    }
+    else{
+        echo "Does not exist \n";
+    }
+    
+
+    clearstatcache();
 }
 
 ?>

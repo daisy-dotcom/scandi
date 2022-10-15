@@ -4,14 +4,14 @@
 require_once('Book.php');
 require_once('DVD.php');
 require_once('Furniture.php');*/
-require_once('../include/autoloader.php');
+require_once(__DIR__ . "\..\include\autoloader.php");
 
 class Product implements DBQueries{
 
     public function __construct($sku, $name, $price){
-        setSKU($sku);
-        setName($name);
-        setPrice($price);
+        $this->setSKU($sku);
+        $this->setName($name);
+        $this->setPrice($price);
         $this->db = new Database();
     }
 
@@ -64,9 +64,9 @@ class Product implements DBQueries{
     public function insert(){
         $this->$query = "INSERT INTO product(sku, name, price) values (?, ?, ?)";
         $this->data = [
-            'sku' => getSKU(), 
-            'name' => getName(), 
-            'price' => getPrice()
+            'sku' => $this->getSKU(), 
+            'name' => $this->getName(), 
+            'price' => $this->getPrice()
         ];
         return $this->db->insert($this->query, $this->data);
     }

@@ -8,10 +8,12 @@ function phpTest(){
         method: 'POST',
         url: 'http://localhost:8080/scandi/api/index.php',
         data: {
-            sku: '4243NDSNKAKU',
-            name: 'Carrie',
-            price: '50.50',
-            size: '15',
+            args : {
+                sku : '4243NDSNKAKU',
+                name: 'Carrie',
+                price: '50.50',
+                weight: '15'
+            },
             productType: 'Book',
             request: 'insert'
         }

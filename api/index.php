@@ -1,9 +1,9 @@
 <?php 
 header("Access-Control-Allow-Origin: *");
 
-require_once('include/autoloader.php');
+require_once(__DIR__ .'\include\autoloader.php');
 
-$products = array(
+/*$products = array(
     'Product' => [$_REQUEST['sku'],$_REQUEST['name'],
     $_REQUEST['price']],
 
@@ -16,16 +16,18 @@ $products = array(
 
     'DVD' => [$_REQUEST['sku'],$_REQUEST['name'],
     $_REQUEST['price'],$_REQUEST['size']]
-);
+);*/
 
   echo var_dump($_REQUEST);
   //$classStr = $products[$_REQUEST['productType']];
-  $classStr = $_REQUEST['productType'];
-  echo var_dump($classStr);
-  echo __DIR__;
-  $item = new $classStr;
+  $class = new ReflectionClass($_REQUEST['productType']);
+  $item = $class->newInstanceArgs($_REQUEST['args']);
+  #echo var_dump($classStr);
+  #echo __DIR__;
+  #$item = new $classStr;
+  
   echo $item;
-  echo __DIR__;
+  #echo __DIR__;
 
 
 switch($_REQUEST['request']){
@@ -36,7 +38,7 @@ switch($_REQUEST['request']){
     echo $item.insert();
     break;
   case 'delete':
-    echo item.delete();
+    echo $item.delete();
     break;
 }
 

@@ -2,12 +2,12 @@
 
 namespace api;
 
-require '../../private/config.php';
+require __DIR__ . "\..\..\private\config.php";
 
-class Database implements DBQueries{
+class Database{
 
     public function _construct(){
-        setConnection();
+        $this->setConnection();
     }
     public function getConnection(){
         return $this->connection;
@@ -54,8 +54,6 @@ class Database implements DBQueries{
             return 'FAIL';
         }
     }
-
-
 
 }
 

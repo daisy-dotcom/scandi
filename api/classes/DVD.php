@@ -1,12 +1,12 @@
 <?php
 
-require_once('../include/autoloader.php');
+require_once(__DIR__ . '\..\include\autoloader.php');
 
 class DVD extends Product implements DBQueries{
 
     public function __construct($sku, $name, $price, $size){
         parent::__construct($sku, $name, $price);
-        setSize($size);
+        $this->setSize($size);
     }
 
     public function getSize(){
@@ -26,8 +26,8 @@ class DVD extends Product implements DBQueries{
     public function insert(){
         $this->$query = "INSERT INTO dvd(sku, size) values (?, ?)";
         $this->data = [
-            'sku' => getSKU(), 
-            'size' => getSize()
+            'sku' => $this->getSKU(), 
+            'size' => $this->getSize()
         ];
         return $this->db->insert($this->query, $this->data);
     }
