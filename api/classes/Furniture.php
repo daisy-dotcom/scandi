@@ -40,7 +40,7 @@ class Furniture extends Product implements DBQueries{
     }
 
     public function insert(){
-        $this->$query = "INSERT INTO furniture(sku, length, width, height) values (?, ?, ?, ?)";
+        $this->query = "INSERT INTO furniture(sku, length, width, height) values (:sku, :length, :width, :height)";
         $this->data = [
             'sku' => $this->getSKU(), 
             'length' => $this->getLength(), 
@@ -52,7 +52,7 @@ class Furniture extends Product implements DBQueries{
     }
 
     public function delete($skuToDelete){
-        $this->$query = "DELETE FROM furniture where sku in ?";
+        $this->query = "DELETE FROM furniture where sku in ?";
         $this->data = $skuToDelete;
         return $this->db->insert($this->query, $this->data);
     }

@@ -1,10 +1,10 @@
 <?php
 
-/*require_once('Database.php');
-require_once('Book.php');
+#require_once('Database.php');
+/*require_once('Book.php');
 require_once('DVD.php');
 require_once('Furniture.php');*/
-require_once(__DIR__ . "\..\include\autoloader.php");
+require_once(__DIR__ . '\..\include\autoloader.php');
 
 class Product implements DBQueries{
 
@@ -49,20 +49,21 @@ class Product implements DBQueries{
         $this->query = "SELECT * FROM product join dvd using (sku)";
         $productArray = $productArray + $this->db->get($this->query);*/
 
-        $book = new Book(0,0,0,0);
+        /*$book = new Book(0,0,0,0);
         $productArray = $book->get();
 
         $furniture = new Furniture(0,0,0,0,0,0);
         $productArray = $productArray + $furniture->get();
 
         $dvd = new DVD(0,0,0,0);
-        $productArray = $productArray + $dvd->get();
-
-        return $productArray;
+        $productArray = $productArray + $dvd->get();*/
+         $this->query = "SELECT sku FROM product";
+        $skuArray = $this->db->get($query);
+        return $skuArray;
     }
 
     public function insert(){
-        $this->$query = "INSERT INTO product(sku, name, price) values (?, ?, ?)";
+        $this->query = "INSERT INTO product(sku, name, price) values (:sku, :name, :price)";
         $this->data = [
             'sku' => $this->getSKU(), 
             'name' => $this->getName(), 
@@ -72,9 +73,21 @@ class Product implements DBQueries{
     }
 
     public function delete($skuToDelete){
+        $book = new Book(0,0,0,0);
+        $result = $book->delete($skuToDelete);
+        echo $result . "\n";
+
+        $furniture = new Furniture(0,0,0,0,0,0);
+        $result = $furniture->delete($skuToDelete);
+        echo $result . "\n";
+
+        $dvd = new DVD(0,0,0,0);
+        $result = $dvd->delete($skuToDelete);
+        echo $result . "\n";
+
         $this->$query = "DELETE FROM product where sku in ?";
         $this->data = $skuToDelete;
-        return $this->db->insert($this->query, $this->data);
+        return $this->db->delete($this->query, $this->data);
     }
 
 }

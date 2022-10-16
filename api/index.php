@@ -3,42 +3,28 @@ header("Access-Control-Allow-Origin: *");
 
 require_once(__DIR__ .'\include\autoloader.php');
 
-/*$products = array(
-    'Product' => [$_REQUEST['sku'],$_REQUEST['name'],
-    $_REQUEST['price']],
-
-    'Book' => [$_REQUEST['sku'],$_REQUEST['name'],
-    $_REQUEST['price'],$_REQUEST['weight']],
-
-    'Furniture' => [$_REQUEST['sku'],$_REQUEST['name'], 
-    $_REQUEST['price'],$_REQUEST['length'],$_REQUEST['width'],
-    $_REQUEST['height']],
-
-    'DVD' => [$_REQUEST['sku'],$_REQUEST['name'],
-    $_REQUEST['price'],$_REQUEST['size']]
-);*/
-
-  echo var_dump($_REQUEST);
+  #echo var_dump($_REQUEST);
   //$classStr = $products[$_REQUEST['productType']];
   $class = new ReflectionClass($_REQUEST['productType']);
   $item = $class->newInstanceArgs($_REQUEST['args']);
-  #echo var_dump($classStr);
-  #echo __DIR__;
-  #$item = new $classStr;
-  
-  echo $item;
-  #echo __DIR__;
 
+  $productInstance = new ReflectionClass('Product');
+  $product = $productInstance->newInstanceArgs(array($_REQUEST['args']['sku'],
+  $_REQUEST['args']['name'], $_REQUEST['args']['price']));
 
 switch($_REQUEST['request']){
   case 'get':
-    echo $item.get();
+    echo $item->get();
     break;
   case 'insert':
-    echo $item.insert();
+    $productResult = $product->insert();
+    $result = $item->insert();
+    var_dump($result);
     break;
   case 'delete':
-    echo $item.delete();
+    $result = $item->delete($_REQUEST['skuToDelete']);
+    #echo $item->delete();
+    echo $result;
     break;
 }
 

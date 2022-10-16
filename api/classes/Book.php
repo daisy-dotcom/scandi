@@ -20,25 +20,24 @@ class Book extends Product implements DBQueries{
 
     public function get(){
         $this->$query = "SELECT * FROM product join book using (sku)";
-        //$this->data = [getSKU(), getName(), getPrice(), getSize()];
-        return $this->db->get($query);
+        return $this->db->get($this->query);
 
     }
 
     public function insert(){
-        $this->$query = "INSERT INTO book(sku, weight) values (:sku, :weight)";
+        $this->query = "INSERT INTO book(sku, weight) values(:sku, :weight)";
         $this->data = [
             'sku' => $this->getSKU(), 
             'weight' => $this->getWeight()
         ];
-        return $this->db->insert($query, $data);
+        return $this->db->insert($this->query, $this->data);
 
     }
 
     public function delete($skuToDelete){
         $this->$query = "DELETE FROM book where sku in ?";
         $this->data = $skuToDelete;
-        return $this->db->insert($query, $data);
+        return $this->db->insert($this->query, $this->data);
     }
 
 }

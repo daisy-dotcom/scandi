@@ -5,17 +5,17 @@ $(document).ready( function (){
 
 function phpTest(){
     $.ajax({
-        method: 'POST',
+        method: 'DELETE',
         url: 'http://localhost:8080/scandi/api/index.php',
         data: {
             args : {
-                sku : '4243NDSNKAKU',
-                name: 'Carrie',
-                price: '50.50',
-                weight: '15'
+                sku : '',
+                name: '',
+                price: 0,
             },
-            productType: 'Book',
-            request: 'insert'
+            skuToDelete: ['4243NDSNKAKU'],
+            productType: 'Product',
+            request: 'delete'
         }
     }).done(function (msg){
         console.log(msg);
