@@ -1,11 +1,10 @@
 $(document).ready( function (){
 
-    //phpPostFurnitureTest();
-    phpGetTest();
+    //phpPostDVDTest();
+    phpDeleteTest();
 });
 
-/*
-        ----POST TEST----
+
 function phpPostBookTest(){
     $.ajax({
         method: 'POST',
@@ -23,8 +22,6 @@ function phpPostBookTest(){
         console.log(msg);
     });
 }
-
-*/
 
 
 function phpDeleteTest(){
@@ -48,6 +45,7 @@ function phpDeleteTest(){
 
 
 function phpGetTest(){
+
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/scandi/api/index.php?product=all'
@@ -62,12 +60,12 @@ function phpPostFurnitureTest(){
         url: 'http://localhost:8080/scandi/api/index.php',
         data: {
             args : {
-                sku : 'ER89YH4ERIU',
-                name: 'Ottoman',
-                price: 340,
-                length: 10,
-                width: 45,
-                height: 7
+                sku : 'FWELUOHI43I7',
+                name: 'Table',
+                price: 400,
+                length: 70,
+                width: 13,
+                height: 6
             },
             productType: 'Furniture'
         }

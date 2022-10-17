@@ -6,7 +6,11 @@ require_once(__DIR__ .'\include\autoloader.php');
 
 switch($_SERVER['REQUEST_METHOD']){
   case 'GET':
-    echo "GET REQUEST \n " ;
+    if($_GET['product'] == 'all'){
+      $getProducts = new Product(0,0,0);
+      $productArray = $getProducts->get();
+      var_dump($productArray);
+    }
     break;
   case 'POST':
     $class = new ReflectionClass($_REQUEST['productType']);
@@ -16,11 +20,17 @@ switch($_SERVER['REQUEST_METHOD']){
     $product = $productInstance->newInstanceArgs(array($_REQUEST['args']['sku'],
     $_REQUEST['args']['name'], $_REQUEST['args']['price']));
 
-    $productResult = $product->insert();
-    $result = $item->insert();
-    var_dump($result);
+    if ($product->insert() != 'Duplicate Entry'){
+      $result = $item->insert();
+      echo $result;
+    }
+    else{
+      echo 'This entry already exists';
+    }
+
+
     break;
-    
+
   case 'DELETE':
     $data = json_decode(file_get_contents("php://input"));
 

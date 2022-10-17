@@ -19,7 +19,7 @@ class Book extends Product implements DBQueries{
     }
 
     public function get(){
-        $this->$query = "SELECT * FROM product join book using (sku)";
+        $this->query = "SELECT * FROM product join book using (sku)";
         return $this->db->get($this->query);
 
     }
@@ -35,7 +35,7 @@ class Book extends Product implements DBQueries{
     }
 
     public function delete($skuToDelete){
-        $this->query = "DELETE FROM book where sku in (?)";
+        $this->query = "DELETE FROM book where sku in ";
         $this->data = $skuToDelete;
         return $this->db->delete($this->query, $this->data);
     }

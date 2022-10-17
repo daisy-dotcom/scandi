@@ -4,16 +4,10 @@
 require(__DIR__ . "\..\..\private\config.php");
 
 class Database{
-    #cho $host;
-    #define('CONFIGS' , parse_ini_file(__DIR__ . "\..\..\private\config.ini"));
+
     public function __construct(){
         $this->CONFIG = parse_ini_file(__DIR__ . "\..\..\private\config.ini");
-        #echo $this->CONFIG['dbname'];
         $this->setConnection();
-        #cho __DIR__ . "\..\..\private\config.php" . "\n";
-        #echo $host . ' ' . $username . "\n"; 
-        /*echo "Database Constructor \n";
-        echo __DIR__ . "\..\..\private\config.php" . "\n";*/
     }
     public function getConnection(){
         return $this->connection;
@@ -31,15 +25,14 @@ class Database{
             var_dump($e->getMessage());
         }
     }
-    public function closeConnection(){
-       
+    public function closeConnection(){   
         $this->connection = null;
     }
 
     public function get($query){
         $stmt = $this->connection->prepare($query);
         if ($stmt->execute() == TRUE){
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
     }
@@ -56,14 +49,18 @@ class Database{
         }
         catch (PDOException $e){
             if($e->errorInfo[1] == 1062){
-                return 'Duplicate Entry' . "\n";
+                return 'Duplicate Entry';
             } 
-            #echo $e->getMessage() . "\n";
+            echo $e->getMessage();
         }
 
     }
 
     public function delete($query , $data){
+        $ids = implode(',' , array_fill(0,count($data),'?'));
+        $appendToQuery = '('. $ids .')';
+        $query = $query . $appendToQuery;
+
         $stmt = $this->connection->prepare($query);
         if ($stmt->execute($data) == TRUE){
             return 'SUCCESSFUL DELETION';

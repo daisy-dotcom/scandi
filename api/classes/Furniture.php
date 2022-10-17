@@ -34,7 +34,7 @@ class Furniture extends Product implements DBQueries{
     }
 
     public function get(){
-        $this->$query = "SELECT * FROM product join furniture using (sku)";
+        $this->query = "SELECT * FROM product join furniture using (sku)";
         return $this->db->get($this->query);
 
     }
@@ -52,7 +52,7 @@ class Furniture extends Product implements DBQueries{
     }
 
     public function delete($skuToDelete){
-        $this->query = "DELETE FROM furniture where sku in (?)";
+        $this->query = "DELETE FROM furniture where sku in ";
         $this->data = $skuToDelete;
         return $this->db->delete($this->query, $this->data);
     }

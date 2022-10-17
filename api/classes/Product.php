@@ -1,9 +1,5 @@
 <?php
 
-#require_once('Database.php');
-/*require_once('Book.php');
-require_once('DVD.php');
-require_once('Furniture.php');*/
 require_once(__DIR__ . '\..\include\autoloader.php');
 
 class Product implements DBQueries{
@@ -39,27 +35,24 @@ class Product implements DBQueries{
         $this->price = $price;
     }
 
+    public function cmp($a, $b){
+        return $a['sku'] <=> $b['sku'];
+    }
+
     public function get(){
-        /*$this->query = "SELECT * FROM product join book using (sku)";
-        $productArray = $this->db->get($query);
-
-        $this->query = "SELECT * FROM product join furniture using (sku)";
-        $productArray = $productArray + $this->db->get($query);
-
-        $this->query = "SELECT * FROM product join dvd using (sku)";
-        $productArray = $productArray + $this->db->get($this->query);*/
-
-        /*$book = new Book(0,0,0,0);
-        $productArray = $book->get();
+        $book = new Book(0,0,0,0);
+        $bookArray = $book->get();
 
         $furniture = new Furniture(0,0,0,0,0,0);
-        $productArray = $productArray + $furniture->get();
+        $furnitureArray = $furniture->get();
 
         $dvd = new DVD(0,0,0,0);
-        $productArray = $productArray + $dvd->get();*/
-         $this->query = "SELECT sku FROM product";
-        $skuArray = $this->db->get($query);
-        return $skuArray;
+        $dvdArray = $dvd->get();
+
+        $result = array_merge($bookArray, $furnitureArray, $dvdArray);
+
+        usort($result, array($this, "cmp"));
+        return $result;
     }
 
     public function insert(){
@@ -85,7 +78,7 @@ class Product implements DBQueries{
         $result = $dvd->delete($skuToDelete);
         echo $result . "\n";
 
-        $this->query = "DELETE FROM product where sku in (?)";
+        $this->query = "DELETE FROM product where sku in ";
         $this->data = $skuToDelete;
         return $this->db->delete($this->query, $this->data);
     }
