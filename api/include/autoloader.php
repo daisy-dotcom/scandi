@@ -4,7 +4,7 @@ spl_autoload_register('autoLoader');
 
 function autoLoader($className){
 
-    echo $className . "\n";
+    #echo $className . "\n";
 
     #$dir = dirname(__DIR__, 1);
     #$path = $dir . "\classes\\";
@@ -14,7 +14,7 @@ function autoLoader($className){
 
     $fullPath = $path . $className . $ext;
 
-    echo $fullPath . "\n";
+    #echo $fullPath . "\n";
 
     if(file_exists($fullPath)){
         include $fullPath;

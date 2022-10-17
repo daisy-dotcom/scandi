@@ -85,7 +85,7 @@ class Product implements DBQueries{
         $result = $dvd->delete($skuToDelete);
         echo $result . "\n";
 
-        $this->$query = "DELETE FROM product where sku in ?";
+        $this->query = "DELETE FROM product where sku in (?)";
         $this->data = $skuToDelete;
         return $this->db->delete($this->query, $this->data);
     }

@@ -1,30 +1,34 @@
 <?php 
 header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Methods: *');
 
 require_once(__DIR__ .'\include\autoloader.php');
 
-  #echo var_dump($_REQUEST);
-  //$classStr = $products[$_REQUEST['productType']];
-  $class = new ReflectionClass($_REQUEST['productType']);
-  $item = $class->newInstanceArgs($_REQUEST['args']);
-
-  $productInstance = new ReflectionClass('Product');
-  $product = $productInstance->newInstanceArgs(array($_REQUEST['args']['sku'],
-  $_REQUEST['args']['name'], $_REQUEST['args']['price']));
-
-switch($_REQUEST['request']){
-  case 'get':
-    echo $item->get();
+switch($_SERVER['REQUEST_METHOD']){
+  case 'GET':
+    echo "GET REQUEST \n " ;
     break;
-  case 'insert':
+  case 'POST':
+    $class = new ReflectionClass($_REQUEST['productType']);
+    $item = $class->newInstanceArgs($_REQUEST['args']);
+  
+    $productInstance = new ReflectionClass('Product');
+    $product = $productInstance->newInstanceArgs(array($_REQUEST['args']['sku'],
+    $_REQUEST['args']['name'], $_REQUEST['args']['price']));
+
     $productResult = $product->insert();
     $result = $item->insert();
     var_dump($result);
     break;
-  case 'delete':
-    $result = $item->delete($_REQUEST['skuToDelete']);
-    #echo $item->delete();
-    echo $result;
+    
+  case 'DELETE':
+    $data = json_decode(file_get_contents("php://input"));
+
+    $productInstance = new ReflectionClass('Product');
+    $product = $productInstance->newInstanceArgs(array($data->args->sku,$data->args->name,
+    $data->args->price));
+    
+    $result = $product->delete($data->skuToDelete);
     break;
 }
 

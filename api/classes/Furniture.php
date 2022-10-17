@@ -30,7 +30,7 @@ class Furniture extends Product implements DBQueries{
         $this->width = $width;
     }
     public function setHeight($height){
-        return $this->height;
+        $this->height = $height;
     }
 
     public function get(){
@@ -52,9 +52,9 @@ class Furniture extends Product implements DBQueries{
     }
 
     public function delete($skuToDelete){
-        $this->query = "DELETE FROM furniture where sku in ?";
+        $this->query = "DELETE FROM furniture where sku in (?)";
         $this->data = $skuToDelete;
-        return $this->db->insert($this->query, $this->data);
+        return $this->db->delete($this->query, $this->data);
     }
     
 }

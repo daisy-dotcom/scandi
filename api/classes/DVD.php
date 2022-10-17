@@ -24,7 +24,7 @@ class DVD extends Product implements DBQueries{
     }
 
     public function insert(){
-        $this->query = "INSERT INTO dvd(sku, size) values (?, ?)";
+        $this->query = "INSERT INTO dvd(sku, size) values (:sku, :size)";
         $this->data = [
             'sku' => $this->getSKU(), 
             'size' => $this->getSize()
@@ -33,9 +33,9 @@ class DVD extends Product implements DBQueries{
     }
 
     public function delete($skuToDelete){
-        $this->query = "DELETE FROM dvd where sku in ?";
+        $this->query = "DELETE FROM dvd where sku in (?)";
         $this->data = $skuToDelete;
-        return $this->db->insert($this->query, $this->data);
+        return $this->db->delete($this->query, $this->data);
 
     }
     
