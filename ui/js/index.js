@@ -1,15 +1,17 @@
 $(document).ready( function (){
 
     //phpPostFurnitureTest();
-    phpGetTest();
+    //phpPostDVDTest();
+    //phpPostBookTest();
+    //phpGetTest();
 });
 
-/*
-        ----POST TEST----
+
 function phpPostBookTest(){
+    let url = 'http://localhost:80/scandi/api/index.php'
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:8080/scandi/api/index.php',
+        url: url,
         data: {
             args : {
                 sku : '4243NDSNKAKU',
@@ -24,8 +26,6 @@ function phpPostBookTest(){
     });
 }
 
-*/
-
 
 function phpDeleteTest(){
 
@@ -37,9 +37,11 @@ function phpDeleteTest(){
             price: 0,
         }
     };
+
+    let url = 'http://localhost:80/scandi/api/index.php';
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/scandi/api/index.php',
+        url: url,
         data: JSON.stringify(data)
     }).done(function (msg){
         console.log(msg);
@@ -48,18 +50,22 @@ function phpDeleteTest(){
 
 
 function phpGetTest(){
+    let url = 'http://localhost:80/scandi/api/index.php?product=all';
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/scandi/api/index.php?product=all'
+        url: url
     }).done(function (msg){
         console.log(msg);
     });
 }
 
 function phpPostFurnitureTest(){
+
+    let url = 'http://localhost/scandi/api/index.php';
+
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:8080/scandi/api/index.php',
+        url: url,
         data: {
             args : {
                 sku : 'ER89YH4ERIU',
@@ -77,9 +83,11 @@ function phpPostFurnitureTest(){
 }
 
 function phpPostDVDTest(){
+    let url = 'http://localhost:80/scandi/api/index.php';
+
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:8080/scandi/api/index.php',
+        url: url,
         data: {
             args : {
                 sku : 'FWELUOHI43I7',

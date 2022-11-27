@@ -8,7 +8,7 @@ class Furniture extends Product implements DBQueries{
         parent::__construct($sku, $name, $price);
         $this->setLength($length);
         $this->setWidth($width);
-        $this->setHeight($height);
+        $this->setHeight($height); 
     }
     public function getLength(){
         return $this->length;
