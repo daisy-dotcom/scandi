@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../js/addProduct.js"></script>
     <link rel="stylesheet" href="../styles/global.css" type="text/css">
     <link rel="stylesheet" href="../styles/product_page.css" type="text/css">
@@ -21,31 +22,27 @@
 
     <div class="container">
         <form id="product_form">
+            <label for="sku">SKU</label>
+            <input id="sku" type="text" name="sku" required>
 
-            <form>
-                <label for="sku">SKU</label>
-                <input id="sku" type="text" name="sku" >
-    
-                <label for="name">Name</label>
-                <input id="name" type="text" name="name" >
-    
-                <label for="price">Price ($)</label>
-                <input id="price" type="number" name="price" >
-    
-                <label for="typeSwitcher">Type Switcher</label>
-                <select  id="productType" type="text" name="typeSwitcher" >
-                    <option value="">Type Switcher</option>
-                    <option value="Book">Book</option>
-                    <option value="DVD">DVD</option>
-                    <option value="Furniture">Furniture</option>
-                </select>
-            </form>
-    
-            <form id="dynamic-form">
-    
-            </form>
-    
-    
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" required>
+
+            <label for="price">Price ($)</label>
+            <input id="price" type="number" step="1" name="price" required>
+
+            <label for="typeSwitcher">Type Switcher</label>
+            <select  id="productType" type="text" name="typeSwitcher" required>
+                <option value=""></option>
+                <option value="Book">Book</option>
+                <option value="DVD">DVD</option>
+                <option value="Furniture">Furniture</option>
+            </select>
+
+            <div id="sub-form">
+
+            </div>
+
         </form>
 
     </div>
