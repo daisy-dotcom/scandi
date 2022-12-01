@@ -9,7 +9,8 @@ switch($_SERVER['REQUEST_METHOD']){
     if($_GET['product'] == 'all'){
       $getProducts = new Product(0,0,0);
       $productArray = $getProducts->get();
-      var_dump($productArray);
+      //var_dump($productArray);
+      echo json_encode($productArray);
     }
     break;
   case 'POST':
@@ -20,12 +21,12 @@ switch($_SERVER['REQUEST_METHOD']){
     $product = $productInstance->newInstanceArgs(array($_REQUEST['args']['sku'],
     $_REQUEST['args']['name'], $_REQUEST['args']['price']));
 
-    if ($product->insert() != 'Duplicate Entry'){
+    if ($product->insert() != 'DUPLICATE'){
       $result = $item->insert();
       echo $result;
     }
     else{
-      echo 'This entry already exists';
+      echo 'DUPLICATE';
     }
 
 

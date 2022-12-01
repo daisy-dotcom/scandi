@@ -1,29 +1,20 @@
-/*h1{
-    display: inline-block;
-    text-align: center;
-}
-
-.header-buttons{
-    display: inline-block;
-    justify-self: right;
-    align-self: center;
-}*/
-
 .container{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    justify-content: flex-start;
-    align-items: center;
-    column-gap: 4vw;
-    row-gap: 5vh;
-    /*padding-left: 7%; */
-    padding: 7px 6vw 7px 6vw;
-    padding-bottom: 7px;
+    flex-flow: row wrap; 
+    align-content: flex-start;
+    gap: 3em 3em;
+    padding: 7px 2.5% 7px 12.5%;
+
     justify-self: center;
-    /*justify-self: center;
-    align-self: center;*/
+ 
+}
+
+
+
+.box-container{
+    width: 255px;
+    height: 210px;
+    border: 2.5px solid black;
 }
 
 .box{
@@ -32,18 +23,27 @@
     align-items: center;
     width: 250px;
     height: 200px;
-    border: 0.15em solid black;
 }
 
 .delete-checkbox{
     position: relative;
-    left: -40%;
-    top: 5%;
+    left: -44%
 }
 
-/*
-check that this works tomorrow
-label input[type=checkbox]{
-    border-color: grey;
-}*/
+
+@media screen and (min-width: 700px) and ( max-width: 1030px){
+    .container{
+        padding: 7px 1.5% 7px 15.5%;
+    }
+
+    
+}
+
+@media screen and (max-width: 700px){
+    .container{
+        padding: 7px 23.5vw 7px 23.5vw ;
+    }
+    
+}
+
 

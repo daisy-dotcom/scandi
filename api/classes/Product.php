@@ -52,7 +52,7 @@ class Product implements DBQueries{
         $result = array_merge($bookArray, $furnitureArray, $dvdArray);
 
         usort($result, array($this, "cmp"));
-        return json_encode($result);
+        return $result;
     }
 
     public function insert(){

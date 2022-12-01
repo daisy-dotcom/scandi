@@ -68,7 +68,8 @@ function validateForm(){
     );
 
     if (isValid){
-        //postData(data);
+        console.log(data);
+        postData(data);
     }
 }
 
@@ -82,7 +83,6 @@ function displayErrorMessage(err){
         errorMessage = "Please provide the data of indicated type";
     }
 
-    console.log($('.error-msg').length)
     if(!$('.error-msg').length){
         $('.container').prepend(`<p class="error-msg">${errorMessage}</p>`);
     }
@@ -92,6 +92,28 @@ function displayErrorMessage(err){
 }
 
 function postData(data){
+    let productType = data.productType;
+    let args = delete data.productType ? data : {};
+
+    $.ajax({
+        method: 'POST',
+        url: 'http://localhost:80/scandi/api/index.php',
+        data: {
+            productType: productType,
+            args : args
+        }
+    }).done(function (msg){
+        if (msg === "SUCCESS"){
+            toHomePage();
+        }
+    });
     
 }
 
+function toHomePage() {
+    location.href = "../index.html";
+}
+
+function cancelProductAdd(){
+    toHomePage();
+}

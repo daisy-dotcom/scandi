@@ -77,8 +77,14 @@ fieldset{
     color: red;
 }
 
-legend, input, .error-msg{
+legend, input[type="text"], .error-msg{
     width: 250px;
+}
+
+p{
+    margin: 5px 0;
+    padding: 0 2px;
+    text-align: center;
 }
 
 .footer{

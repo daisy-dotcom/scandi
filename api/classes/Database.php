@@ -41,15 +41,15 @@ class Database{
         try{
             $stmt = $this->connection->prepare($query);
             if ($stmt->execute($data) == TRUE){
-                return 'SUCCESSFUL INSERTION';
+                return 'SUCCESS';
             }
             else{
-                return 'FAILED TO INSERT';
+                return 'FAIL';
             }
         }
         catch (PDOException $e){
             if($e->errorInfo[1] == 1062){
-                return 'Duplicate Entry';
+                return 'DUPLICATE';
             } 
             echo $e->getMessage();
         }
@@ -63,10 +63,10 @@ class Database{
 
         $stmt = $this->connection->prepare($query);
         if ($stmt->execute($data) == TRUE){
-            return 'SUCCESSFUL DELETION';
+            return 'SUCCESS';
         }
         else{
-            return 'FAILED DELETION';
+            return 'FAIL';
         }
     }
 
