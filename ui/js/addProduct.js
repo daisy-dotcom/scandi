@@ -1,9 +1,13 @@
 const subForm = {
-    DVD: `<label for="size">Size (MB)</label> \n
+    DVD: `<legend>Please enter the size of the DVD to the closest whole number</legend> \n
+        <label for="size">Size (MB)</label> \n
         <input id="size" type="number" min="0" step="1" name="size" required>`,
-    Book: `<label for="weight">Weight (KG)</label> \n
+    Book: `<legend>Please enter the weight of the book to the closest whole number</legend> \n
+        <label for="weight">Weight (KG)</label> \n
         <input id="weight" type="number" min="0" step="1" name="weight" required>`,
-    Furniture: `<label for="height">Height (CM)</label> \n
+    Furniture: `<legend>Please enter the height, width and length of the piece of furniture 
+    to the closest whole number</legend> \n
+    <label for="height">Height (CM)</label> \n
     <input id="height" type="number" min="0" step="1" name="height" required> \n
 
     <label for="width">Width (CM)</label> \n
@@ -21,22 +25,73 @@ $(document).ready( function(){
 });
 
 function generateSubForm(){
-    $('#sub-form').html('')
-    $('#sub-form').append(subForm[$(this).val()]);
+    if($('#product_form fieldset').next()){
+        $('#product_form fieldset').next().remove();
+    };
+
+    let subFormHTML = `<fieldset> \n`;
+    subFormHTML += subForm[$(this).val()];
+    subFormHTML += ` \n </fieldset> \n`;
+
+    $(subFormHTML).insertAfter('#product_form fieldset');
+
 }
 
 function buttonEventListener(){
     if ($(this).text() === 'SAVE'){
-        saveProduct();
+        validateForm();
     }
     else{
         cancelProductAdd();
     }
 }
 
-function saveProduct(){
-    $('#product_form').validate();
-    console.log(validator.errors()); 
+function validateForm(){
+    let data = {};
 
+    let isValid = true;
+    
+    $('#product_form fieldset input, #product_form fieldset select').each( function(){
+            let element = $(this).get(0);
+            if(!element.checkValidity()){
+                isValid = false;
+                console.log(element);
+                console.log(element.validationMessage);
+                displayErrorMessage(element.validationMessage);
+                return false;
+            }
+            
+            else{
+                data[element.id] = element.value;
+            }
+        }
+    );
 
+    if (isValid){
+        //postData(data);
+    }
 }
+
+function displayErrorMessage(err){
+    let errorMessage;
+
+    if((err.includes("fill")) || (err.includes("select"))){
+        errorMessage = "Please submit required data";
+    }
+    else{
+        errorMessage = "Please provide the data of indicated type";
+    }
+
+    console.log($('.error-msg').length)
+    if(!$('.error-msg').length){
+        $('.container').prepend(`<p class="error-msg">${errorMessage}</p>`);
+    }
+    else{
+        $('.error-msg').text(errorMessage);
+    }
+}
+
+function postData(data){
+    
+}
+

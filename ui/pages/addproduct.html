@@ -21,27 +21,26 @@
     </header>
 
     <div class="container">
+    
         <form id="product_form">
-            <label for="sku">SKU</label>
-            <input id="sku" type="text" name="sku" required>
-
-            <label for="name">Name</label>
-            <input id="name" type="text" name="name" required>
-
-            <label for="price">Price ($)</label>
-            <input id="price" type="number" step="1" name="price" required>
-
-            <label for="typeSwitcher">Type Switcher</label>
-            <select  id="productType" type="text" name="typeSwitcher" required>
-                <option value=""></option>
-                <option value="Book">Book</option>
-                <option value="DVD">DVD</option>
-                <option value="Furniture">Furniture</option>
-            </select>
-
-            <div id="sub-form">
-
-            </div>
+            <fieldset>
+                <label for="sku">SKU</label>
+                <input id="sku" type="text" name="sku" pattern="^\S+$" required>
+    
+                <label for="name">Name</label>
+                <input id="name" type="text" name="name" required>
+    
+                <label for="price">Price ($)</label>
+                <input id="price" type="number" step="1" min="1" name="price" required>
+    
+                <label for="typeSwitcher">Type Switcher</label>
+                <select  id="productType" type="text" name="typeSwitcher" required>
+                    <option value=""></option>
+                    <option value="Book">Book</option>
+                    <option value="DVD">DVD</option>
+                    <option value="Furniture">Furniture</option>
+                </select>
+            </fieldset>
 
         </form>
 

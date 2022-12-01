@@ -50,6 +50,7 @@ h3{
     margin: 0;
     padding: 5px 0 5px 0;
 }
+
 button{
     all: unset;
     border: 0.15em solid black;
@@ -64,6 +65,20 @@ button:hover{
 
 button:active{
     box-shadow: -2px -2px 2px grey;
+}
+
+fieldset{
+    all: unset;
+    display: block;
+    margin: 5px 0;
+}
+
+.error-msg{
+    color: red;
+}
+
+legend, input, .error-msg{
+    width: 250px;
 }
 
 .footer{

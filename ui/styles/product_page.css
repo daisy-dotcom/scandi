@@ -3,10 +3,9 @@ label, input{
     margin: 5px 0;
 }
 
-input{
-    width: 250px;
-}
-
 .container{
     justify-self: center;
+    padding: 10px;
 }
+
+
