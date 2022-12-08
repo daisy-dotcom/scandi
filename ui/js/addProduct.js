@@ -38,7 +38,7 @@ function generateSubForm(){
 }
 
 function buttonEventListener(){
-    if ($(this).text() === 'SAVE'){
+    if ($(this).text() === 'Save'){
         validateForm();
     }
     else{
@@ -111,7 +111,7 @@ function postData(data){
 }
 
 function toHomePage() {
-    location.href = "../index.html";
+    location.href = "../../index.html";
 }
 
 function cancelProductAdd(){

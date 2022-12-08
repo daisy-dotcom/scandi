@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '\..\include\autoloader.php');
+require_once(__DIR__ . '/../include/autoloader.php');
 
 class Book extends Product implements DBQueries{
 

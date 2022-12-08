@@ -1,6 +1,5 @@
 <?php
 
-#namespace api;
 require(__DIR__ . "\..\..\private\config.php");
 
 class Database{
@@ -19,7 +18,7 @@ class Database{
             $db = $this->CONFIG['db']; 
             $this->connection = new PDO("mysql:host=$host;dbname=$db;charset=UTF8", 
             $this->CONFIG['username'], $this->CONFIG['password']);
-            #var_dump($this->connection);
+
         }
         catch (PDOException $e){
             var_dump($e->getMessage());
@@ -51,23 +50,42 @@ class Database{
             if($e->errorInfo[1] == 1062){
                 return 'DUPLICATE';
             } 
-            echo $e->getMessage();
+            else{
+                echo $e->getMessage();
+                return 'FAIL';
+            } 
         }
-
     }
 
     public function delete($query , $data){
-        $ids = implode(',' , array_fill(0,count($data),'?'));
-        $appendToQuery = '('. $ids .')';
-        $query = $query . $appendToQuery;
 
-        $stmt = $this->connection->prepare($query);
-        if ($stmt->execute($data) == TRUE){
-            return 'SUCCESS';
+        try{
+
+            $ids = implode(',' , array_fill(0,count($data),'?'));
+            $appendToQuery = '('. $ids .')';
+            $query = $query . $appendToQuery;
+    
+            $stmt = $this->connection->prepare($query);
+            if ($stmt->execute($data) == TRUE){
+                return 'SUCCESS';
+            }
+            else{
+                return 'FAIL';
+            }
+        
         }
-        else{
-            return 'FAIL';
+        catch(PDOException $e){
+            if ($data != []){
+                return 'FAIL';
+            }
+            else{
+                return 'SUCCESS';
+            }
+            
         }
+
+
+
     }
 
 }

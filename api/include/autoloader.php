@@ -14,6 +14,7 @@ function autoLoader($className){
 
     $fullPath = $path . $className . $ext;
 
+    //$fullPath = str_replace('\\', '/', $fullPath);
     #echo $fullPath . "\n";
 
     if(file_exists($fullPath)){
@@ -21,6 +22,7 @@ function autoLoader($className){
     }
     else{
         echo "Does not exist \n";
+        echo $fullPath;
     }
     
 

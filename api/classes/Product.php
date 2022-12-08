@@ -49,6 +49,10 @@ class Product implements DBQueries{
         $dvd = new DVD(0,0,0,0);
         $dvdArray = $dvd->get();
 
+        /*var_dump($bookArray);
+        var_dump($furnitureArray);
+        var_dump($dvdArray);*/
+
         $result = array_merge($bookArray, $furnitureArray, $dvdArray);
 
         usort($result, array($this, "cmp"));
@@ -68,15 +72,15 @@ class Product implements DBQueries{
     public function delete($skuToDelete){
         $book = new Book(0,0,0,0);
         $result = $book->delete($skuToDelete);
-        echo $result . "\n";
+        //echo $result . "\n";
 
         $furniture = new Furniture(0,0,0,0,0,0);
         $result = $furniture->delete($skuToDelete);
-        echo $result . "\n";
+        //echo $result . "\n";
 
         $dvd = new DVD(0,0,0,0);
         $result = $dvd->delete($skuToDelete);
-        echo $result . "\n";
+        //echo $result . "\n";
 
         $this->query = "DELETE FROM product where sku in ";
         $this->data = $skuToDelete;

@@ -1,6 +1,6 @@
 $(document).ready( function (){
 
-    //phpPostDVDTest();
+    phpPostDVDTest();
     //phpDeleteTest();
 });
 

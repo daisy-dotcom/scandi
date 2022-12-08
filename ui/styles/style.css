@@ -1,49 +1,59 @@
+:root{
+    --box-container-width: 255px;
+    --gap-width: 
+    --boxes-can-fit: calc(100% // var(--box-container-width));
+    --space-for-gap: calc(100% - (var(--box-container-width)*var(--boxes-can-fit)));
+    --num-gaps: calc(var(--space-for-gap)//);
+
+}
 .container{
+    
     display: flex;
     flex-flow: row wrap; 
     align-content: flex-start;
-    gap: 3em 3em;
-    padding: 7px 2.5% 7px 12.5%;
+    gap: 3em;
+    margin-block: 7px;
+    margin-inline: auto;
 
-    justify-self: center;
  
 }
 
-
-
 .box-container{
+    display: inline-block;
     width: 255px;
     height: 210px;
     border: 2.5px solid black;
+
 }
 
 .box{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 250px;
-    height: 200px;
-}
-
-.delete-checkbox{
-    position: relative;
-    left: -44%
+    justify-content: center;
+    width: 245px;
+    height: 180px;
+    margin-inline: auto;
 }
 
 
-@media screen and (min-width: 700px) and ( max-width: 1030px){
+
+@media screen and (min-width: 770px) and ( max-width: 915px){
     .container{
-        padding: 7px 1.5% 7px 15.5%;
+        padding: 7px 1.5% 7px 15.5% ;
     }
 
     
 }
 
-@media screen and (max-width: 700px){
+@media screen and ( (max-width: 770px) ){
     .container{
-        padding: 7px 23.5vw 7px 23.5vw ;
+        padding: 7px 0.5% 7px 20.5% ;
     }
     
 }
+
+    
+
 
 

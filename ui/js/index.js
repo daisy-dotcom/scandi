@@ -7,23 +7,27 @@ $(document).ready( function(){
 });
 
 function getProducts(){
+    let url = 'http://localhost:80/scandi/api/index.php?product=all';
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:80/scandi/api/index.php?product=all'
+        url: url
     }).done(function (msg){
+        //console.log(msg);
         let data = JSON.parse(msg);
         addProductsToContainer(data);
     });
 }
 
 function addProductsToContainer(data){
+    $('#product-container').html('');
+    
     let productHTML = ``;
 
     for (let product of data){
 
         productHTML += `<div class="box-container"> \n
-        <div class="box"> \n
         <input type="checkbox" class="delete-checkbox"> \n
+        <div class="box"> \n
         <p>${product.sku}</p> \n
         <p>${product.name}</p> \n
         <p><span>${parseInt(product.price).toFixed(2)}</span> $</p> \n `;
@@ -47,22 +51,25 @@ function addProductsToContainer(data){
     
     }
 
-    //$('#product-container').append(productHTML);
-    
-    console.log(productHTML);
+    $('#product-container').append(productHTML);
 
 }
 
 function toAddProductPage(){
-    location.href = 'pages/addproduct.html';
+    location.href = '../../add-product.html';
 }
 
 function massDelete(){
     let skuToDelete = [];
-    $('.delete-checkbox:checked + p').each( function() {
+    $('.delete-checkbox:checked + div > p:first-child').each( function() {
         skuToDelete.push($(this).text());
     });
+    //console.log(skuToDelete);
+    dbDelete(skuToDelete);
 
+}
+
+function dbDelete(skuToDelete){
     let data = {
         skuToDelete: skuToDelete,
         args: {
@@ -77,7 +84,9 @@ function massDelete(){
         url: 'http://localhost:80/scandi/api/index.php',
         data: JSON.stringify(data)
     }).done(function (msg){
-        if (msg === 'SUCCESS'){
+        //console.log(`Delete log: ${msg}`)
+        //console.log(msg=='SUCCESS');
+        if (msg == "SUCCESS"){
             getProducts();
         }
     });
