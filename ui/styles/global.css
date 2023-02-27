@@ -69,6 +69,11 @@ button:active{
     box-shadow: -2px -2px 2px grey;
 }
 
+.header-buttons > button{
+    min-width: 10rem;
+    display: block;
+}
+
 fieldset{
     border: 0;
     display: block;
