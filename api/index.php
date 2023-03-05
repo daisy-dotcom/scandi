@@ -21,8 +21,9 @@
         $productInstance = new ReflectionClass('Product');
         $product = $productInstance->newInstanceArgs(array($_REQUEST['args']['sku'],
         $_REQUEST['args']['name'], $_REQUEST['args']['price']));
-  
-        if ($product->insert() != 'DUPLICATE'){
+
+        $response = $product->insert()
+        if ( $response != 'DUPLICATE' && $response != 'FAIL'){
           $result = $item->insert();
           echo $result;
         }

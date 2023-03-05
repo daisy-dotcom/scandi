@@ -76,6 +76,7 @@ class Database{
         }
         catch(PDOException $e){
             if ($data != []){
+                echo $e->getMessage();
                 return 'FAIL';
             }
             else{

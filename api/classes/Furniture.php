@@ -10,6 +10,7 @@ class Furniture extends Product implements DBQueries{
         $this->setWidth($width);
         $this->setHeight($height); 
     }
+    
     public function getLength(){
         return $this->length;
     }

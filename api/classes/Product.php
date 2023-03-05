@@ -49,10 +49,6 @@ class Product implements DBQueries{
         $dvd = new DVD(0,0,0,0);
         $dvdArray = $dvd->get();
 
-        /*var_dump($bookArray);
-        var_dump($furnitureArray);
-        var_dump($dvdArray);*/
-
         $result = array_merge($bookArray, $furnitureArray, $dvdArray);
 
         usort($result, array($this, "cmp"));
@@ -66,7 +62,7 @@ class Product implements DBQueries{
             'name' => $this->getName(), 
             'price' => $this->getPrice()
         ];
-        return $this->db->insert($this->query, $this->data);
+        return $result;
     }
 
     public function delete($skuToDelete){
