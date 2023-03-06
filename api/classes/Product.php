@@ -40,6 +40,13 @@ class Product implements DBQueries{
     }
 
     public function get(){
+        /*
+        New GET Query
+        SELECT * FROM product
+        LEFT JOIN dvd USING (sku)
+        LEFT JOIN furniture USING (sku)
+        LEFT JOIN book USING (sku); 
+        */
         $book = new Book(0,0,0,0);
         $bookArray = $book->get();
 
@@ -62,10 +69,11 @@ class Product implements DBQueries{
             'name' => $this->getName(), 
             'price' => $this->getPrice()
         ];
-        return $result;
+        return $this->db->insert($this->query, $this->data);
     }
 
     public function delete($skuToDelete){
+        /*Move DELETE queries here
         $book = new Book(0,0,0,0);
         $result = $book->delete($skuToDelete);
         //echo $result . "\n";
@@ -76,7 +84,7 @@ class Product implements DBQueries{
 
         $dvd = new DVD(0,0,0,0);
         $result = $dvd->delete($skuToDelete);
-        //echo $result . "\n";
+        //echo $result . "\n"; */
 
         $this->query = "DELETE FROM product where sku in ";
         $this->data = $skuToDelete;

@@ -12,7 +12,6 @@ function getProducts(){
         method: 'GET',
         url: url
     }).done(function (msg){
-        //console.log(msg);
         let data = JSON.parse(msg);
         addProductsToContainer(data);
     });
@@ -64,7 +63,6 @@ function massDelete(){
     $('.delete-checkbox:checked + div > p:first-child').each( function() {
         skuToDelete.push($(this).text());
     });
-    //console.log(skuToDelete);
     dbDelete(skuToDelete);
 
 }
