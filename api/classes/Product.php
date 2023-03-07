@@ -48,18 +48,12 @@ class Product{
         LEFT JOIN book USING (sku)
         ORDER BY sku; 
         */
-        $book = new Book(0,0,0,0);
-        $bookArray = $book->get();
-
-        $furniture = new Furniture(0,0,0,0,0,0);
-        $furnitureArray = $furniture->get();
-
-        $dvd = new DVD(0,0,0,0);
-        $dvdArray = $dvd->get();
-
-        $result = array_merge($bookArray, $furnitureArray, $dvdArray);
-
-        usort($result, array($this, "cmp"));
+        $this->query = "SELECT * FROM product ".
+        "LEFT JOIN dvd USING (sku) ".
+        "LEFT JOIN furniture USING (sku) ".
+        "LEFT JOIN book USING (sku) ".
+        "ORDER BY sku ";
+        $result = $this->db->get($this->query);
         return $result;
     }
 
