@@ -18,12 +18,6 @@ class Book extends Product{
         
     }
 
-    public function get(){
-        $this->query = "SELECT * FROM product join book using (sku)";
-        return $this->db->get($this->query);
-
-    }
-
     public function insert(){
         $this->query = "INSERT INTO book(sku, weight) values(:sku, :weight)";
         $this->data = [

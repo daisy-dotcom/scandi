@@ -34,12 +34,6 @@ class Furniture extends Product{
         $this->height = $height;
     }
 
-    public function get(){
-        $this->query = "SELECT * FROM product join furniture using (sku)";
-        return $this->db->get($this->query);
-
-    }
-
     public function insert(){
         $this->query = "INSERT INTO furniture(sku, length, width, height) values (:sku, :length, :width, :height)";
         $this->data = [

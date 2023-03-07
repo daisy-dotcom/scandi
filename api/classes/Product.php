@@ -40,14 +40,6 @@ class Product{
     }
 
     public function get(){
-        /*
-        New GET Query
-        SELECT * FROM product
-        LEFT JOIN dvd USING (sku)
-        LEFT JOIN furniture USING (sku)
-        LEFT JOIN book USING (sku)
-        ORDER BY sku; 
-        */
         $this->query = "SELECT * FROM product ".
         "LEFT JOIN dvd USING (sku) ".
         "LEFT JOIN furniture USING (sku) ".

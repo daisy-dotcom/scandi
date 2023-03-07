@@ -17,12 +17,6 @@ class DVD extends Product{
         $this->size = $size;   
     }
 
-    public function get(){
-        $this->query = "SELECT * FROM product join dvd using (sku)";
-        return $this->db->get($this->query);
-
-    }
-
     public function insert(){
         $this->query = "INSERT INTO dvd(sku, size) values (:sku, :size)";
         $this->data = [
