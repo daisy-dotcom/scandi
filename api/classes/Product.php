@@ -45,7 +45,8 @@ class Product{
         SELECT * FROM product
         LEFT JOIN dvd USING (sku)
         LEFT JOIN furniture USING (sku)
-        LEFT JOIN book USING (sku); 
+        LEFT JOIN book USING (sku)
+        ORDER BY sku; 
         */
         $book = new Book(0,0,0,0);
         $bookArray = $book->get();

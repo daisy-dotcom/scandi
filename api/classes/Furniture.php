@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '\..\include\autoloader.php');
 
-class Furniture extends Product implements DBQueries{
+class Furniture extends Product{
 
     public function __construct($sku, $name, $price, $length, $width, $height){
         parent::__construct($sku, $name, $price);

@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../include/autoloader.php');
 
-class Book extends Product implements DBQueries{
+class Book extends Product{
 
     public function __construct($sku, $name, $price, $weight){
         parent::__construct($sku, $name, $price);
