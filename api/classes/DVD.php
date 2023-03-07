@@ -31,13 +31,6 @@ class DVD extends Product implements DBQueries{
         ];
         return $this->db->insert($this->query, $this->data);
     }
-
-    public function delete($skuToDelete){
-        $this->query = "DELETE FROM dvd where sku in ";
-        $this->data = $skuToDelete;
-        return $this->db->delete($this->query, $this->data);
-
-    }
     
 }
 

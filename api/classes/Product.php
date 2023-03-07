@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '\..\include\autoloader.php');
 
-class Product implements DBQueries{
+class Product{
 
     public function __construct($sku, $name, $price){
         $this->setSKU($sku);
@@ -72,20 +72,8 @@ class Product implements DBQueries{
         return $this->db->insert($this->query, $this->data);
     }
 
+    #on delete, cascade to book, dvd and furniture tables
     public function delete($skuToDelete){
-        /*Move DELETE queries here
-        $book = new Book(0,0,0,0);
-        $result = $book->delete($skuToDelete);
-        //echo $result . "\n";
-
-        $furniture = new Furniture(0,0,0,0,0,0);
-        $result = $furniture->delete($skuToDelete);
-        //echo $result . "\n";
-
-        $dvd = new DVD(0,0,0,0);
-        $result = $dvd->delete($skuToDelete);
-        //echo $result . "\n"; */
-
         $this->query = "DELETE FROM product where sku in ";
         $this->data = $skuToDelete;
         return $this->db->delete($this->query, $this->data);
